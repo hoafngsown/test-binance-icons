@@ -1,6 +1,6 @@
 {
   "name": "hoafngsown-binance-icons",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "description": "The Crypto/currency icons listed on Binance exchange",
   "author": {
     "name": "Hoang Son",
@@ -10,7 +10,7 @@
   "homepage": "https://github.com/hoafngsown/test-binance-icons",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoafngsown/test-binance-icons"
+    "url": "git+https://github.com/hoafngsown/test-binance-icons.git"
   },
   "keywords": [
     "binance",
