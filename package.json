@@ -1,6 +1,6 @@
 {
   "name": "hoafngsown-binance-icons",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "The Crypto/currency icons listed on Binance exchange",
   "author": {
     "name": "Hoang Son",
@@ -21,7 +21,15 @@
   ],
   "license": "MIT",
   "main": "./lib/index.js",
+  "module": "./lib/index.js",
   "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "import": "./lib/index.js",
+      "types": "./types/index.d.ts"
+    }
+  },
   "scripts": {
     "clean": "rimraf lib/*",
     "prebuild": "npm run clean",
