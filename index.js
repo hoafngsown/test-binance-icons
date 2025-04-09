@@ -1,5 +1,10 @@
 const path = require('path');
-const fs = require('fs');
+
+// Simple detection of browser environment without trying to use Node.js modules
+const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+
+// Only require fs in a Node.js environment
+const fs = !isBrowser ? require('fs') : null;
 
 // Read the manifest data
 const manifest = require('./manifest.json');
@@ -40,21 +45,35 @@ class IconCollection {
     }
 
     const icon = this._iconMap.get(iconSymbol);
-    const svgPath = path.join(__dirname, this.directory, `${iconSymbol}.svg`);
+    const svgPath = `${this.directory}/${iconSymbol}.svg`;
     
-    try {
-      const svg = fs.readFileSync(svgPath, 'utf8');
+    // In browser environment, don't try to read files
+    if (isBrowser) {
       return {
         name: icon.name,
         symbol: icon.symbol,
-        svg: svg
+        svg: null,
+        svgPath: svgPath
+      };
+    }
+    
+    // In Node.js environment, read the SVG file
+    try {
+      const fullPath = path.join(__dirname, svgPath);
+      const svg = fs.readFileSync(fullPath, 'utf8');
+      return {
+        name: icon.name,
+        symbol: icon.symbol,
+        svg: svg,
+        svgPath: svgPath
       };
     } catch (error) {
       console.error(`Error reading SVG file for ${iconSymbol}:`, error.message);
       return {
         name: icon.name,
         symbol: icon.symbol,
-        svg: null
+        svg: null,
+        svgPath: svgPath
       };
     }
   }
